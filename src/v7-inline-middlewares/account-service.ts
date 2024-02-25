@@ -48,6 +48,15 @@ export class AccountService extends IAccountService {
             )
         }
 
+        if (userId != "10") {
+            return bad(
+                Fail.create("USER_IS_NOT_ACCOUNT_OWNER", {
+                    userId,
+                    accountId,
+                })
+            );
+        }
+
         account.addCredits(creditAmount)
         const [errorSavingAccount] = await this.accountRepository.saveAccount(account)
 
